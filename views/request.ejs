@@ -1,192 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rest API</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rest API</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
+
 <body>
-    <div id="section">
-        <ul class="collapsible popout">
-            <li>
-              <div class="collapsible-header"><i class="material-icons">whatshot</i>GET</div>
-              <div class="collapsible-body">
-                    <div class="row">
-                        <div class="input-field col s1">
-                            <label>
-                              <input name="group1" id="username_radio" onchange="changeValue('username_radio')" type="radio" />
-                              <span></span>
-                            </label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input id="get_user_name" type="text" class="validate">
-                            <label for="get_user_name">User Name</label>
-                        </div>
-                        <div class="input-field col s1">
-                            <label>
-                              <input name="group1" id="country_radio" onchange="changeValue('country_radio')" type="radio" />
-                              <span></span>
-                            </label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input id="get_country" type="text" class="validate">
-                            <label for="get_country">Country</label>
-                        </div>
-                        <button id="GET" type="button" class="waves-effect waves-light btn input-field col s1">GET</button>
-                    </div>
-                    <div class="info">
-                    
-                    </div>
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">whatshot</i>POST</div>
-              <div class="collapsible-body">
-                <div class="row">
-                  <div class="input-field col s5">
-                    <input id="post_user_name" type="text" class="validate">
-                    <label for="post_user_name">User Name</label>
-                  </div>
-                  <div class="input-field col s5">
-                      <input id="post_country" type="text" class="validate">
-                      <label for="post_country">Country</label>
-                  </div>
-                  <button id="POST" type="button" class="waves-effect waves-light btn input-field col s1">POST</button>
-                  </div>
-                  <div class="info">
+  <div id="section">
+    <div class="flex">
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
 
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">whatshot</i>PUT</div>
-              <div class="collapsible-body">
-                <div class="row">
-                  <div class="input-field col s3">
-                    <input id="put_old_user_name" type="text" class="validate">
-                    <label for="put_old_user_name">Old User Name</label>
-                  </div>
-                  <div class="input-field col s3">
-                    <input id="put_new_user_name" type="text" class="validate">
-                    <label for="put_new_user_name">New User Name</label>
-                  </div>
-                  <div class="input-field col s3">
-                    <input id="put_new_country" type="text" class="validate">
-                    <label for="put_new_country">New Country</label>
-                  </div>
-                  <button id="PUT" type="button" class="waves-effect waves-light btn input-field col s1">PUT</button>
-                </div>
-                <div class="info">
-            
-                </div>
-              </div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>DELETE</div>
-                <div class="collapsible-body">
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input id="delete_user_name" type="text" class="validate">
-                      <label for="delete_user_name">User Name</label>
-                    </div>
-                    <button id="DELETE" type="button" class="waves-effect waves-light btn input-field col s1">DELETE</button>
-                  </div>
-                  <div class="info">
-          
-                  </div>
-                </div>
-              </li>
-          </ul>
+        <tbody id="database">
+
+        </tbody>
+      </table>
     </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script>
-          var a=false,b=false;
-          $(document).ready(function(){
-            $('#get_username').prop("disabled", a);
-            $('#get_country').prop("disabled", b);
-          });
-          function changeValue(val){
-              console.log(val,val=="username_radio");
-              if(val=='username_radio'){
-                a=document.getElementById(val).value=="on"?true:false;
-                b=!a;
-                $('#get_user_name').prop("disabled", !a);
-                $('#get_country').prop("disabled", !b);
-              }
-              else{
-                b=document.getElementById(val).value=="on"?true:false;
-                a=!b;
-                $('#get_user_name').prop("disabled", !a);
-                $('#get_country').prop("disabled", !b);
-              }
-              console.log(a,b);
-          }
-            $(document).ready(function(){
-                $('.collapsible').collapsible();
-            });
+    <div class="flex">
+      <ul class="collapsible popout" style="width:auto;">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>GET</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="input-field col s1">
+                <label>
+                  <input name="group1" id="username_radio" onchange="changeValue('username_radio')" type="radio" />
+                  <span></span>
+                </label>
+              </div>
+              <div class="input-field col s4">
+                <input id="get_user_name" type="text" class="validate">
+                <label for="get_user_name">User Name</label>
+              </div>
+              <div class="input-field col s1">
+                <label>
+                  <input name="group1" id="country_radio" onchange="changeValue('country_radio')" type="radio" />
+                  <span></span>
+                </label>
+              </div>
+              <div class="input-field col s4">
+                <input id="get_country" type="text" class="validate">
+                <label for="get_country">Country</label>
+              </div>
+              <button id="GET" type="button" class="waves-effect waves-light btn input-field col s2">GET</button>
+            </div>
+            <div class="info">
 
-            $("#POST").click(function(){
-              document.querySelectorAll(".info")[1].innerHTML="";
-              var username=$("#post_user_name").val();
-              var country=$("#post_country").val();
-              $.post("/restapi/users",{username:username,country:country},function(data,status){
-                console.log(data,status);
-                document.querySelectorAll(".info")[1].innerHTML=data;
-              });
-            });
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>POST</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="input-field col s5">
+                <input id="post_user_name" type="text" class="validate">
+                <label for="post_user_name">User Name</label>
+              </div>
+              <div class="input-field col s5">
+                <input id="post_country" type="text" class="validate">
+                <label for="post_country">Country</label>
+              </div>
+              <button id="POST" type="button" class="waves-effect waves-light btn input-field col s2">POST</button>
+            </div>
+            <div class="info">
 
-            $("#PUT").click(function(){
-              document.querySelectorAll(".info")[2].innerHTML="";
-              var oldusername=$("#put_old_user_name").val();
-              var newusername=$("#put_new_user_name").val();
-              var newcountry=$("#put_new_country").val();
-              console.log(oldusername,newusername,newcountry);
-              $.ajax({
-                  url: '/restapi/users/'+oldusername,
-                  type: 'PUT',
-                  data:{username:newusername,country:newcountry},
-                  success: function(data) {
-                    document.querySelectorAll(".info")[2].innerHTML=data;
-                  }
-              });
-            });
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>PUT</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="input-field col s3">
+                <input id="put_old_user_name" type="text" class="validate">
+                <label for="put_old_user_name">Old User Name</label>
+              </div>
+              <div class="input-field col s3">
+                <input id="put_new_user_name" type="text" class="validate">
+                <label for="put_new_user_name">New User Name</label>
+              </div>
+              <div class="input-field col s3">
+                <input id="put_new_country" type="text" class="validate">
+                <label for="put_new_country">New Country</label>
+              </div>
+              <button id="PUT" type="button" class="waves-effect waves-light btn input-field col s2">PUT</button>
+            </div>
+            <div class="info">
 
-            $("#DELETE").click(function(){
-              document.querySelectorAll(".info")[3].innerHTML="";
-              var username=$("#delete_user_name").val();
-              $.ajax({
-                  url: '/restapi/users/'+username,
-                  type: 'DELETE',
-                  success: function(data) {
-                    document.querySelectorAll(".info")[3].innerHTML=data;
-                  }
-              });
-            });
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>DELETE</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="delete_user_name" type="text" class="validate">
+                <label for="delete_user_name">User Name</label>
+              </div>
+              <button id="DELETE" type="button" class="waves-effect waves-light btn input-field col s2">DELETE</button>
+            </div>
+            <div class="info">
 
-            $("#GET").click(function(){
-                document.querySelectorAll(".info")[0].innerHTML="";
-                var info={};
-                if(a){
-                    var username=$("#get_user_name").val();
-                    info={username:username};
-                } else {
-                    var country=$("#get_country").val();
-                    info={country:country};
-                }
-              $.get("/restapi/users",info,function(data,status){
-                console.log(data,status);
-                data.forEach(user => {
-                    document.querySelectorAll(".info")[0].innerHTML+=`Username : ${user.username} , Country : ${user.country}<br>`;
-                });
-              });
-            });
-      </script>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    var a = false,
+      b = false;
+    $(document).ready(function () {
+      updateData();
+      $('#get_username').prop("disabled", a);
+      $('#get_country').prop("disabled", b);
+    });
+
+    function updateData(){
+      $("#database").html("");
+      $.get("/restapi/users", {}, function (data, status) {
+        console.log(data, status);
+        data.forEach((ele)=>{
+          $("#database").append(`
+              <tr>
+                <td>${ele.username}</td>
+                <td>${ele.country}</td>
+              </tr>
+          `);
+        });
+      });
+    }
+
+    function changeValue(val) {
+      if (val == 'username_radio') {
+        a = document.getElementById(val).value == "on" ? true : false;
+        b = !a;
+        $('#get_user_name').prop("disabled", !a);
+        $('#get_country').prop("disabled", !b);
+      } else {
+        b = document.getElementById(val).value == "on" ? true : false;
+        a = !b;
+        $('#get_user_name').prop("disabled", !a);
+        $('#get_country').prop("disabled", !b);
+      }
+    }
+    $(document).ready(function () {
+      $('.collapsible').collapsible();
+    });
+
+    $("#POST").click(function () {
+      document.querySelectorAll(".info")[1].innerHTML = "";
+      var username = $("#post_user_name").val();
+      var country = $("#post_country").val();
+      $.post("/restapi/users", {
+        username: username,
+        country: country
+      }, function (data, status) {
+        updateData();
+        document.querySelectorAll(".info")[1].innerHTML = data;
+      });
+    });
+
+    $("#PUT").click(function () {
+      document.querySelectorAll(".info")[2].innerHTML = "";
+      var oldusername = $("#put_old_user_name").val();
+      var newusername = $("#put_new_user_name").val();
+      var newcountry = $("#put_new_country").val();
+      console.log(oldusername, newusername, newcountry);
+      $.ajax({
+        url: '/restapi/users/' + oldusername,
+        type: 'PUT',
+        data: {
+          username: newusername,
+          country: newcountry
+        },
+        success: function (data) {
+          updateData();
+          document.querySelectorAll(".info")[2].innerHTML = data;
+        }
+      });
+    });
+
+    $("#DELETE").click(function () {
+      document.querySelectorAll(".info")[3].innerHTML = "";
+      var username = $("#delete_user_name").val();
+      $.ajax({
+        url: '/restapi/users/' + username,
+        type: 'DELETE',
+        success: function (data) {
+          updateData();
+          console.log(data);
+          document.querySelectorAll(".info")[3].innerHTML = data;
+        }
+      });
+    });
+
+    $("#GET").click(function () {
+      document.querySelectorAll(".info")[0].innerHTML = "";
+      var info = {};
+      if (a) {
+        var username = $("#get_user_name").val();
+        info = {
+          username: username
+        };
+      } else {
+        var country = $("#get_country").val();
+        info = {
+          country: country
+        };
+      }
+      $.get("/restapi/users", info, function (data, status) {
+        updateData();
+        data.forEach(user => {
+          document.querySelectorAll(".info")[0].innerHTML +=
+            `Username : ${user.username} , Country : ${user.country}<br>`;
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>

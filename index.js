@@ -78,7 +78,7 @@ app.put("/restapi/users/:username",function(req,res){
 // delete the user
 app.delete("/restapi/users/:username",function(req,res){
     var username=req.params.username;
-    User.deleteOne({username:username}).then(function(err,user){
+    User.deleteOne({username:username},function(err,user){
         if(err)
         res.send(err);
         else{
