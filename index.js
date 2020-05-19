@@ -93,6 +93,6 @@ app.delete("/restapi/users/:username",function(req,res){
     });
 });
 
-app.listen(4000||process.env.PORT,function(){
+app.listen(process.env.PORT||4000,function(){
     console.log("Server Started");
 });
