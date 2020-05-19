@@ -5,8 +5,6 @@ const User=require('./models/user');
 
 const app=express();
 
-dotenv.config();
-
 app.set('view engine', 'ejs');
 
 mongoose.connect('mongodb+srv://Terminator:Vaibhav@0306@rest-api-ag54g.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true , useUnifiedTopology: true });
