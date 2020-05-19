@@ -22,12 +22,10 @@ app.get("/",function(req,res){
 
 // get user data
 app.get("/restapi/users",function(req,res){
-    console.log(req.query);
     User.find(req.query,function(err,user){
         if(err){
             res.send(err);
         } else {
-            console.log(user,user.length);
             if(user.length!=0){
                 res.send(user);
             } else {

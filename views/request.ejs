@@ -136,7 +136,6 @@
     function updateData() {
       $("#database").html("");
       $.get("/restapi/users", {}, function (data, status) {
-        console.log(data, status);
         data.forEach((ele) => {
           $("#database").append(`
               <tr>
@@ -220,7 +219,6 @@
         info.country = newcountry;
       if (newusername != "")
         info.username = newusername;
-      console.log(info);
       $.ajax({
         url: '/restapi/users/' + oldusername,
         type: 'PUT',
@@ -254,7 +252,6 @@
         type: 'DELETE',
         success: function (data) {
           updateData();
-          console.log(data);
           document.querySelectorAll(".info")[3].innerHTML = data;
           setTimeout(function () {
             document.querySelectorAll(".info")[3].innerHTML = "";
@@ -288,7 +285,6 @@
         return;
       }
       $.get("/restapi/users", info, function (data, status) {
-        // updateData();
         data.forEach(user => {
           if(!user.username)
           document.querySelectorAll(".info")[0].innerHTML=user;
