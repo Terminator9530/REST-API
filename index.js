@@ -7,7 +7,7 @@ const app=express();
 
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb+srv://terminator:testdb@accounts-0uu7d.mongodb.net/Users',{ useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Terminator:testdb@rest-api-ag54g.mongodb.net/test',{ useNewUrlParser: true , useUnifiedTopology: true });
 
 app.use(express.static('public'));
 
