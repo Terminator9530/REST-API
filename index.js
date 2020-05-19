@@ -3,6 +3,8 @@ const bodyParser=require("body-parser");
 const mongoose=require('mongoose');
 const User=require('./models/user');
 
+const app=express();
+
 app.set('view engine', 'ejs');
 
 mongoose.connect(process.env.MONGOCONN,{ useNewUrlParser: true , useUnifiedTopology: true });
