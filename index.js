@@ -2,8 +2,11 @@ const express=require('express');
 const bodyParser=require("body-parser");
 const mongoose=require('mongoose');
 const User=require('./models/user');
+const dotenv=require('dotenv');
 
 const app=express();
+
+dotenv.config();
 
 app.set('view engine', 'ejs');
 
