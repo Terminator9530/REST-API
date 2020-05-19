@@ -129,8 +129,8 @@
       b = false;
     $(document).ready(function () {
       updateData();
-      $('#get_username').prop("disabled", a);
-      $('#get_country').prop("disabled", b);
+      $('#get_user_name').prop("disabled", !a);
+      $('#get_country').prop("disabled", !b);
     });
 
     function updateData(){
@@ -152,11 +152,19 @@
       if (val == 'username_radio') {
         a = document.getElementById(val).value == "on" ? true : false;
         b = !a;
+        if(!a)
+        $('#get_user_name').val("");
+        else
+        $('#get_country').val("");
         $('#get_user_name').prop("disabled", !a);
         $('#get_country').prop("disabled", !b);
       } else {
         b = document.getElementById(val).value == "on" ? true : false;
         a = !b;
+        if(!a)
+        $('#get_user_name').val("");
+        else
+        $('#get_country').val("");
         $('#get_user_name').prop("disabled", !a);
         $('#get_country').prop("disabled", !b);
       }
