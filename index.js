@@ -60,20 +60,39 @@ app.post("/restapi/users",function(req,res){
 // updated the user
 app.put("/restapi/users/:username",function(req,res){
     var username=req.params.username;
-    User.findOne({username:username},function(err,user){
+    User.findOne({username:username},function(err,olduser){
         if(err)
         res.send(err);
         else{
-            User.updateOne({username:username},req.body,function(err,data){
-                if(err)
-                res.send(err);
-                else{
-                    if(data.nModified==1)
-                    res.send(`Previous Record : (Username : ${user.username} , Country : ${user.country})<br>Updated Record : (Username : ${req.body.username} , Country : ${req.body.country})`);
-                    else
-                    res.send("Username Not Found");
+            if(olduser){
+                if(!req.body.username && !req.body.country){
+                    res.send("No Updation");
                 }
-            });
+                else{
+                    User.updateOne({username:username},req.body,function(err,data){
+                        if(err)
+                        res.send(err);
+                        else{
+                            if(data.nModified==1){
+                                if(req.body.username){
+                                    User.findOne({username:req.body.username},function(err,newuser){
+                                        if(err)
+                                        res.send(err);
+                                        else{
+                                            res.send(`Previous Record : (Username : ${olduser.username} , Country : ${olduser.country})<br>Updated Record : (Username : ${newuser.username} , Country : ${newuser.country})`);
+                                        }
+                                    });
+                                }
+                                else
+                                res.send(`Previous Record : (Username : ${olduser.username} , Country : ${olduser.country})<br>Updated Record : (Username : ${olduser.username} , Country : ${req.body.country})`);
+                            }
+                        }
+                    });
+                }
+            }
+            else{
+                res.send("Username Not Found");
+            }
         }
     });
 });

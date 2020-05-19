@@ -177,31 +177,63 @@
       document.querySelectorAll(".info")[1].innerHTML = "";
       var username = $("#post_user_name").val();
       var country = $("#post_country").val();
+      if(username=="" || country==""){
+        document.querySelectorAll(".info")[1].innerHTML="Please Enter Both Username and Country";
+        setTimeout(function(){
+          document.querySelectorAll(".info")[1].innerHTML="";
+          $("#post_user_name").val("");
+          $("#post_country").val("");
+        },1500);
+        return;
+      }
       $.post("/restapi/users", {
         username: username,
         country: country
       }, function (data, status) {
         updateData();
         document.querySelectorAll(".info")[1].innerHTML = data;
+        setTimeout(function(){
+            document.querySelectorAll(".info")[1].innerHTML="";
+            $("#post_user_name").val("");
+            $("#post_country").val("");
+          },1500);
       });
     });
 
     $("#PUT").click(function () {
+      var info={};
       document.querySelectorAll(".info")[2].innerHTML = "";
       var oldusername = $("#put_old_user_name").val();
       var newusername = $("#put_new_user_name").val();
       var newcountry = $("#put_new_country").val();
-      console.log(oldusername, newusername, newcountry);
+      if(oldusername==""){
+        document.querySelectorAll(".info")[2].innerHTML="Please Enter The Old User Name";
+        setTimeout(function(){
+            document.querySelectorAll(".info")[2].innerHTML="";
+            $("#put_old_user_name").val("");
+            $("#put_new_user_name").val("");
+            $("#put_new_country").val("");
+          },1500);
+        return;
+      }
+      if(newcountry!="")
+      info.country=newcountry;
+      if(newusername!="")
+      info.username=newusername;
+      console.log(info);
       $.ajax({
         url: '/restapi/users/' + oldusername,
         type: 'PUT',
-        data: {
-          username: newusername,
-          country: newcountry
-        },
+        data: info,
         success: function (data) {
           updateData();
           document.querySelectorAll(".info")[2].innerHTML = data;
+          setTimeout(function(){
+            document.querySelectorAll(".info")[2].innerHTML="";
+            $("#put_old_user_name").val("");
+            $("#put_new_user_name").val("");
+            $("#put_new_country").val("");
+          },1500);
         }
       });
     });
@@ -209,6 +241,14 @@
     $("#DELETE").click(function () {
       document.querySelectorAll(".info")[3].innerHTML = "";
       var username = $("#delete_user_name").val();
+      if(username==""){
+        document.querySelectorAll(".info")[3].innerHTML = "Please Enter The Username";
+          setTimeout(function(){
+            document.querySelectorAll(".info")[3].innerHTML="";
+            $("#delete_user_name").val("");
+          },1500);
+          return;
+      }
       $.ajax({
         url: '/restapi/users/' + username,
         type: 'DELETE',
@@ -216,6 +256,10 @@
           updateData();
           console.log(data);
           document.querySelectorAll(".info")[3].innerHTML = data;
+          setTimeout(function(){
+            document.querySelectorAll(".info")[3].innerHTML="";
+            $("#delete_user_name").val("");
+          },1500);
         }
       });
     });
@@ -234,12 +278,26 @@
           country: country
         };
       }
+      if(!info.username && !info.country){
+        document.querySelectorAll(".info")[0].innerHTML="Please Enter Value of username or country";
+        setTimeout(function(){
+            document.querySelectorAll(".info")[0].innerHTML="";
+            $("#get_user_name").val("");
+            $("#get_country").val("");
+          },1500);
+        return;
+      }
       $.get("/restapi/users", info, function (data, status) {
         updateData();
         data.forEach(user => {
           document.querySelectorAll(".info")[0].innerHTML +=
             `Username : ${user.username} , Country : ${user.country}<br>`;
         });
+        setTimeout(function(){
+            document.querySelectorAll(".info")[0].innerHTML="";
+            $("#get_user_name").val("");
+            $("#get_country").val("");
+          },1500);
       });
     });
   </script>
