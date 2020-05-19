@@ -133,11 +133,11 @@
       $('#get_country').prop("disabled", !b);
     });
 
-    function updateData(){
+    function updateData() {
       $("#database").html("");
       $.get("/restapi/users", {}, function (data, status) {
         console.log(data, status);
-        data.forEach((ele)=>{
+        data.forEach((ele) => {
           $("#database").append(`
               <tr>
                 <td>${ele.username}</td>
@@ -152,19 +152,19 @@
       if (val == 'username_radio') {
         a = document.getElementById(val).value == "on" ? true : false;
         b = !a;
-        if(!a)
-        $('#get_user_name').val("");
+        if (!a)
+          $('#get_user_name').val("");
         else
-        $('#get_country').val("");
+          $('#get_country').val("");
         $('#get_user_name').prop("disabled", !a);
         $('#get_country').prop("disabled", !b);
       } else {
         b = document.getElementById(val).value == "on" ? true : false;
         a = !b;
-        if(!a)
-        $('#get_user_name').val("");
+        if (!a)
+          $('#get_user_name').val("");
         else
-        $('#get_country').val("");
+          $('#get_country').val("");
         $('#get_user_name').prop("disabled", !a);
         $('#get_country').prop("disabled", !b);
       }
@@ -177,13 +177,13 @@
       document.querySelectorAll(".info")[1].innerHTML = "";
       var username = $("#post_user_name").val();
       var country = $("#post_country").val();
-      if(username=="" || country==""){
-        document.querySelectorAll(".info")[1].innerHTML="Please Enter Both Username and Country";
-        setTimeout(function(){
-          document.querySelectorAll(".info")[1].innerHTML="";
+      if (username == "" || country == "") {
+        document.querySelectorAll(".info")[1].innerHTML = "Please Enter Both Username and Country";
+        setTimeout(function () {
+          document.querySelectorAll(".info")[1].innerHTML = "";
           $("#post_user_name").val("");
           $("#post_country").val("");
-        },1500);
+        }, 1500);
         return;
       }
       $.post("/restapi/users", {
@@ -192,34 +192,34 @@
       }, function (data, status) {
         updateData();
         document.querySelectorAll(".info")[1].innerHTML = data;
-        setTimeout(function(){
-            document.querySelectorAll(".info")[1].innerHTML="";
-            $("#post_user_name").val("");
-            $("#post_country").val("");
-          },1500);
+        setTimeout(function () {
+          document.querySelectorAll(".info")[1].innerHTML = "";
+          $("#post_user_name").val("");
+          $("#post_country").val("");
+        }, 1500);
       });
     });
 
     $("#PUT").click(function () {
-      var info={};
+      var info = {};
       document.querySelectorAll(".info")[2].innerHTML = "";
       var oldusername = $("#put_old_user_name").val();
       var newusername = $("#put_new_user_name").val();
       var newcountry = $("#put_new_country").val();
-      if(oldusername==""){
-        document.querySelectorAll(".info")[2].innerHTML="Please Enter The Old User Name";
-        setTimeout(function(){
-            document.querySelectorAll(".info")[2].innerHTML="";
-            $("#put_old_user_name").val("");
-            $("#put_new_user_name").val("");
-            $("#put_new_country").val("");
-          },1500);
+      if (oldusername == "") {
+        document.querySelectorAll(".info")[2].innerHTML = "Please Enter The Old User Name";
+        setTimeout(function () {
+          document.querySelectorAll(".info")[2].innerHTML = "";
+          $("#put_old_user_name").val("");
+          $("#put_new_user_name").val("");
+          $("#put_new_country").val("");
+        }, 1500);
         return;
       }
-      if(newcountry!="")
-      info.country=newcountry;
-      if(newusername!="")
-      info.username=newusername;
+      if (newcountry != "")
+        info.country = newcountry;
+      if (newusername != "")
+        info.username = newusername;
       console.log(info);
       $.ajax({
         url: '/restapi/users/' + oldusername,
@@ -228,12 +228,12 @@
         success: function (data) {
           updateData();
           document.querySelectorAll(".info")[2].innerHTML = data;
-          setTimeout(function(){
-            document.querySelectorAll(".info")[2].innerHTML="";
+          setTimeout(function () {
+            document.querySelectorAll(".info")[2].innerHTML = "";
             $("#put_old_user_name").val("");
             $("#put_new_user_name").val("");
             $("#put_new_country").val("");
-          },1500);
+          }, 1500);
         }
       });
     });
@@ -241,13 +241,13 @@
     $("#DELETE").click(function () {
       document.querySelectorAll(".info")[3].innerHTML = "";
       var username = $("#delete_user_name").val();
-      if(username==""){
+      if (username == "") {
         document.querySelectorAll(".info")[3].innerHTML = "Please Enter The Username";
-          setTimeout(function(){
-            document.querySelectorAll(".info")[3].innerHTML="";
-            $("#delete_user_name").val("");
-          },1500);
-          return;
+        setTimeout(function () {
+          document.querySelectorAll(".info")[3].innerHTML = "";
+          $("#delete_user_name").val("");
+        }, 1500);
+        return;
       }
       $.ajax({
         url: '/restapi/users/' + username,
@@ -256,10 +256,10 @@
           updateData();
           console.log(data);
           document.querySelectorAll(".info")[3].innerHTML = data;
-          setTimeout(function(){
-            document.querySelectorAll(".info")[3].innerHTML="";
+          setTimeout(function () {
+            document.querySelectorAll(".info")[3].innerHTML = "";
             $("#delete_user_name").val("");
-          },1500);
+          }, 1500);
         }
       });
     });
@@ -278,13 +278,13 @@
           country: country
         };
       }
-      if(!info.username && !info.country){
-        document.querySelectorAll(".info")[0].innerHTML="Please Enter Value of username or country";
-        setTimeout(function(){
-            document.querySelectorAll(".info")[0].innerHTML="";
-            $("#get_user_name").val("");
-            $("#get_country").val("");
-          },1500);
+      if (!info.username && !info.country) {
+        document.querySelectorAll(".info")[0].innerHTML = "Please Enter Value of username or country";
+        setTimeout(function () {
+          document.querySelectorAll(".info")[0].innerHTML = "";
+          $("#get_user_name").val("");
+          $("#get_country").val("");
+        }, 1500);
         return;
       }
       $.get("/restapi/users", info, function (data, status) {
@@ -293,11 +293,11 @@
           document.querySelectorAll(".info")[0].innerHTML +=
             `Username : ${user.username} , Country : ${user.country}<br>`;
         });
-        setTimeout(function(){
-            document.querySelectorAll(".info")[0].innerHTML="";
-            $("#get_user_name").val("");
-            $("#get_country").val("");
-          },1500);
+        setTimeout(function () {
+          document.querySelectorAll(".info")[0].innerHTML = "";
+          $("#get_user_name").val("");
+          $("#get_country").val("");
+        }, 1500);
       });
     });
   </script>
