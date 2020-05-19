@@ -27,10 +27,14 @@ app.get("/restapi/users",function(req,res){
         if(err){
             res.send(err);
         } else {
-            if(user){
+            console.log(user,user.length);
+            if(user.length!=0){
                 res.send(user);
             } else {
-                res.send("Username Not Found");
+                if(req.query.username)
+                res.send(["Username Not Found"]);
+                else
+                res.send(["Country Not Found"]);
             }
         }
     });

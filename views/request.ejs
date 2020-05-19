@@ -288,8 +288,14 @@
         return;
       }
       $.get("/restapi/users", info, function (data, status) {
-        updateData();
+        // updateData();
         data.forEach(user => {
+          if(!user.username)
+          document.querySelectorAll(".info")[0].innerHTML=user;
+          else if(!user.country){
+            document.querySelectorAll(".info")[0].innerHTML=user;
+          }
+          else
           document.querySelectorAll(".info")[0].innerHTML +=
             `Username : ${user.username} , Country : ${user.country}<br>`;
         });
